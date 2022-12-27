@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Roboto+Mono:ital,wght@1,100&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.letraNavBar{
+    font-family: 'Kalam', cursive;
+}
+.colorGreeting{
+  background: linear-gradient(-45deg, #6EE0D6, #C6DF8A,#F0DE65);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.navbar .navbar-nav .nav-link {
+  color: white;
+  font-size: 1.1em;
+}
+.navbar .navbar-nav .nav-link:hover{
+  background: linear-gradient(-55deg, #4aada5, #C6DF8A,#F0DE65);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+.rounded-circle{
+  height: 30px;
+  width: 30px;
+}
+@media only screen and (min-width: 992px) {
+.navbar .navbar-nav .nav-item .nav-link {
+  padding: 0 0.5em;
+}
+.navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
+  border-right: 2px solid white;
+}
+}

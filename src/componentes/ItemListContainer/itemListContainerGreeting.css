@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Roboto+Mono:ital,wght@1,100&display=swap');
+
+h2{
+   font-style: italic;
+   font: white;
+   font-family: 'Kalam', cursive;
+}
+.bg-color{
+    background: linear-gradient(-55deg, #4aada5, #C6DF8A,#F0DE65);
+}
