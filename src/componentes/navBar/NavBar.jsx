@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navBar.css";
 
 function NavBar(props) {
@@ -6,7 +7,7 @@ function NavBar(props) {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div className="container-fluid">
-          <a className="navbar-brand" href="./index.html">
+          <Link to="/" className="navbar-brand">
             <img
               src="/assets/logoLaCasaDelLibro.png"
               alt=""
@@ -14,7 +15,7 @@ function NavBar(props) {
               height="150"
               className="d-inline-block align-text-top"
             />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -35,50 +36,50 @@ function NavBar(props) {
           >
             <ul className="navbar-nav align-items-center text-center">
               <li className="nav-item">
-                <a
+                <Link to="/"
                   className="nav-link active letraNavBar fs-5"
                   aria-current="page"
-                  href="./index.html"
+                
                 >
-                  Inicio
-                </a>
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link letraNavBar fs-5"
-                  href="./index.html"
+                <Link 
+                  className="nav-link letraNavBar fs-5" to={"/gender/mangas"}
+                  
                 >
                   Mangas 
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link letraNavBar fs-5"
-                  href="./index.html"
+                <Link 
+                  className="nav-link letraNavBar fs-5" to={"/gender/comics"}
+                  
                 >
                   Cómics
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link letraNavBar fs-5"
-                  href="./index.html"
+                <Link 
+                  className="nav-link letraNavBar fs-5" to="/gender/librosJuveniles"
+                 
                 >
                   Libros Juveniles
-                </a>
+                </Link>
               </li>              
               <li className="nav-item">
-                <a
-                  className="nav-link letraNavBar fs-5"
-                  href="./index.html"
+                <Link
+                  className="nav-link letraNavBar fs-5"  to="/gender/terror"
+                 
                 >
                   Terror
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link to="/carroCompra"
                   className="nav-link letraNavBar fs-5"
-                  href="./index.html"
+                  
                 >
                   <div className="position-relative">
                   <img
@@ -90,7 +91,7 @@ function NavBar(props) {
                   />
                   <span className="position-absolute text-center bg-danger rounded-circle"><h5>{clicOnChart}</h5></span>
                   </div>
-                </a>
+                </Link>
                 
               </li>
             </ul>

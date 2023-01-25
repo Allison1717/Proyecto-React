@@ -167,16 +167,32 @@ function getItems() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(databaseItems);
-    }, 1000);
+    }, 1);
   });
 }
 
-export function getSingleItem() {
-  return new Promise((resolve) => {
+export function getSingleItem(itemid) {
+  // 3. Usamos find para encontrar el producto deseado
+  let itemReq = databaseItems.find((item) => {
+    //console.log(item, itemid);
+    return item.id === parseInt(itemid);
+  });
+
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(databaseItems[0]);
-    }, 2000);
+      if (itemReq !== undefined) resolve(itemReq);
+      else reject("Libro no encontrado en la base de datos.");
+    }, 200);
   });
 }
 
+export function getItemsByGender(genderid) {
+  let itemsCat = databaseItems.filter((item) => item.gender === genderid);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(itemsCat);
+    }, 200);
+  });
+}
 export default getItems;

@@ -18,7 +18,7 @@ function ItemDetailContainer() {
         setLibros(respuesta);
       })
       .catch((error) => alert(`Error: ${error}`));
-  }, []);
+  }, [itemid]);
 
   return (
     <div class="card mb-5">
