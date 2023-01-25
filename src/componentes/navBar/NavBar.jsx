@@ -46,7 +46,7 @@ function NavBar(props) {
               </li>
               <li className="nav-item">
                 <Link 
-                  className="nav-link letraNavBar fs-5" to={"/gender/mangas"}
+                  className="nav-link letraNavBar fs-5" to="/gender/Mangas"
                   
                 >
                   Mangas 
@@ -54,7 +54,7 @@ function NavBar(props) {
               </li>
               <li className="nav-item">
                 <Link 
-                  className="nav-link letraNavBar fs-5" to={"/gender/comics"}
+                  className="nav-link letraNavBar fs-5" to="/gender/Cómics"
                   
                 >
                   Cómics
@@ -62,15 +62,15 @@ function NavBar(props) {
               </li>
               <li className="nav-item">
                 <Link 
-                  className="nav-link letraNavBar fs-5" to="/gender/librosJuveniles"
+                  className="nav-link letraNavBar fs-5" to="/gender/Libros-Juveniles"
                  
                 >
-                  Libros Juveniles
+                  Libros-Juveniles
                 </Link>
               </li>              
               <li className="nav-item">
                 <Link
-                  className="nav-link letraNavBar fs-5"  to="/gender/terror"
+                  className="nav-link letraNavBar fs-5"  to="/gender/Terror"
                  
                 >
                   Terror

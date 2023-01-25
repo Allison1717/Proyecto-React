@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 
 function ItemListContainer() {
   const [libros, setLibros] = useState([]);
-  let idgender = useParams();
+  let {genderid} = useParams();
   useEffect(() => {
-    if (idgender) {
-      getItemsByGender(idgender).then((respuesta) => {
+    if (genderid) {
+      getItemsByGender(genderid).then((respuesta) => {
         console.log(respuesta);
         setLibros(respuesta);
       });
@@ -19,7 +19,7 @@ function ItemListContainer() {
         setLibros(respuesta);
       });
     }
-  }, [idgender]);
+  }, [genderid]);
 
   return (
     <>
