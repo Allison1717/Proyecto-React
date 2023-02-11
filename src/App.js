@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage"
 import { CartContextProvider } from "./storage/cartContext";
 import CartContainer from "./componentes/cartContainer/cartContainer";
-import OrderDetails from "./components/orderDetails/OrderDetails";
+import OrderDetails from "./componentes/orderDetails/OrderDetails";
 import { exportData, exportDataWithBatch } from "./services/firebase";
 //componente App
 function App() {

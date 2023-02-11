@@ -1,14 +1,13 @@
 
 import { useState } from "react";
-import Button, { ButtonChild } from "../button/Button";
 import "./itemCount.css";
 
-function ItemCount({onAddToCart}) {
+function ItemCount({onAddToCart, stock}) {
   const [count, setCount] = useState(0);
 
   function handleAdd() {
     // count < stock
-    if (count < 20){
+    if (count < stock){
       setCount(count + 1);
     }
   }

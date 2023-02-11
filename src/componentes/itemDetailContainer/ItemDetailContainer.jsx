@@ -2,20 +2,20 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getSingleItem } from "../../services/firebase";
 import { cartContext } from "../../storage/cartContext";
-import Button, { ButtonChild } from "../button/Button";
 import ItemCount from "../itemCount/ItemCount";
-import Loader from "../Loader/Loader";
 import "./itemdetail.css";
 
 function ItemDetailContainer() {
-  const [libros, setLibros] = useState([]);
-
-  // 1. obtenemos el valor de la URL con useParams
-  
+  const [libros, setLibros] = useState([]);  
   const [isInCart, setIsInCart] = useState(false);
   let { itemid } = useParams();
-  const { addItem } = useContext(cartContext);
+  const { cart, addItem } = useContext(cartContext);
+  const itemInCart = cart.find((item) => item.id === libros.id);
 
+  let stockUpdated;
+
+  if (itemInCart) stockUpdated = libros.stock - itemInCart.count;
+  else stockUpdated = libros.stock;
   // onAddtoCart
   function handleAddToCart(count) {
     setIsInCart(true);
@@ -25,7 +25,6 @@ function ItemDetailContainer() {
   }
 
   useEffect(() => {
-    // 2. Pasamos por parametro al mockService el id
     getSingleItem(itemid)
       .then((respuesta) => {
         setLibros(respuesta);
@@ -68,10 +67,10 @@ function ItemDetailContainer() {
           </div>
           {isInCart ? (
             <Link to="/carroCompra">
-              <Button>Ir al carrito</Button>
+              <button>Ir al carrito</button>
             </Link>
           ): (
-            <ItemCount onAddToCart={handleAddToCart} />
+            <ItemCount stock={stockUpdated} onAddToCart={handleAddToCart} />
           )}
           
         </div>

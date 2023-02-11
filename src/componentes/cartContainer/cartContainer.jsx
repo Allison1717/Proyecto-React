@@ -1,12 +1,44 @@
 import React from "react";
 import { useContext } from "react";
+import { useState } from "react";
 import { cartContext } from "../../storage/cartContext";
-
+import { useNavigate } from "react-router-dom";
+import { createBuyOrder } from "../../services/firebase";
+import { ButtonChild } from "../button/Button";
 import "./cart.css";
+import CartForm from "./CartForm";
 
 function CartContainer() {
   const { cart } = useContext(cartContext);
- // Rendering condicional: "carrito vacio" -> buton al inicio
+  const [orderId, setOrderId] = useState(null);
+  const navigateTo = useNavigate();
+
+  async function handleCheckout(userData) {
+    const items = cart.map((libros) => ({
+      id: libros.id,
+      title: libros.title,
+      price: libros.price,
+      count: libros.count,
+    }));
+
+    //1. modelo de orden de compra
+    const order = {
+      buyer: userData,
+      items: items,
+      date: new Date(),
+      total: 1000,
+    };
+
+    let id = await createBuyOrder(order); 
+    navigateTo(`/thank-you/${id}`);
+  }
+  if (orderId !== null)
+    return (
+      <div>
+        <h1>Gracias por tu compra</h1>
+        <p>El id de tu compra es: {orderId}</p>
+      </div>
+    );
   return (
     <>
       <h1>Tu Carrito</h1>
@@ -50,6 +82,7 @@ function CartContainer() {
     <div className="cartList_detail">
       <h4>El total de tu compra es de S/.  --,--</h4>
     </div>
+    <ButtonChild onTouch={handleCheckout}>Finalizar Compra</ButtonChild>
   </>
 );
 }
