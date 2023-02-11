@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import "./App.css";
-import ItemListContainer from "./componentes/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./componentes/itemDetailContainer/ItemDetailContainer";
 import NavBar from "./componentes/navBar/NavBar.jsx";
 
@@ -9,8 +8,8 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage"
 import { CartContextProvider } from "./storage/cartContext";
 import CartContainer from "./componentes/cartContainer/cartContainer";
-import { app } from "./services/firebase";
-import { getItemsByGender } from "./services/firebase";
+import OrderDetails from "./components/orderDetails/OrderDetails";
+import { exportData, exportDataWithBatch } from "./services/firebase";
 //componente App
 function App() {
 
@@ -21,6 +20,7 @@ function App() {
   return (
     <>
       <CartContextProvider>
+        <button onClick={exportDataWithBatch}>Export data</button>
         <BrowserRouter>
           <NavBar onLogin={handleLogin} />
           <Routes>
@@ -29,6 +29,7 @@ function App() {
             <Route path="/item/:itemid" element={<ItemDetailContainer />} />
             <Route path="/carroCompra" element={<CartContainer />} />
             <Route path="/contacto" element={<h1>Conctacto</h1>} />
+            <Route path="/thank-you/:orderid" element={<OrderDetails />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

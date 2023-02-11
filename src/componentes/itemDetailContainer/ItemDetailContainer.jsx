@@ -11,23 +11,15 @@ function ItemDetailContainer() {
   const [libros, setLibros] = useState([]);
 
   // 1. obtenemos el valor de la URL con useParams
-  /*let { itemid } = useParams();
-  console.log(itemid);
-  const {addItem,removeItem}=useContext(cartContext);*/
-
-  const [isLoading, setIsLoading] = useState(true);
+  
   const [isInCart, setIsInCart] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
   let { itemid } = useParams();
   const { addItem } = useContext(cartContext);
 
   // onAddtoCart
   function handleAddToCart(count) {
-    /*
-    alert(`Agregaste ${count} de ${libros.title} al carrito`);
-    libros.count = count;
-    addItem(libros);*/
     setIsInCart(true);
+    alert(`Agregaste ${count} de ${libros.title} al carrito`);
     libros.count = count;
     addItem(libros);
   }
@@ -38,21 +30,8 @@ function ItemDetailContainer() {
       .then((respuesta) => {
         setLibros(respuesta);
       })
-      .catch((error) => {
-        setErrorMessage(`Error: ${error}`);
-      })
-      .finally(() => setIsLoading(false));
-  }, [itemid]);
-  // 2 -> if con Earyl Return  / if con return anticipado
-  if (isLoading) return <Loader size={500} />;
-
-  if (errorMessage !== null)
-    return (
-      <div>
-        <h2>Error</h2>
-        <p style={{ color: "red" }}>{errorMessage}</p>
-      </div>
-    );
+      .catch((error) => alert(`Error: ${error}`));
+      }, [itemid]);
 
   return (
     <div class="card mb-5">
@@ -64,8 +43,7 @@ function ItemDetailContainer() {
             alt="imagen"
           ></img>
           <div className="itemcount_container">
-            <button class="bg px-3">
-              {" "}
+            <button class="bg px-3" href="/carroCompra">
               <img
                 src="/assets/carroCompra.png"
                 alt=""

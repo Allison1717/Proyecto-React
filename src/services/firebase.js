@@ -2,12 +2,16 @@
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
-  collection,
-  getDocs,
   doc,
   getDoc,
-  query,
+  collection,
+  getDocs,
   where,
+  query,
+  addDoc,
+  limit,
+  orderBy,
+  writeBatch,
 } from "firebase/firestore";
 //1. Iniciar la conexión a firestore
 const firebaseConfig = {
@@ -28,18 +32,27 @@ const db = getFirestore(app);
 export async function getItems() {
 
   const librosCollection = collection(db, "libros");
-  const querySnapshot = await getDocs(librosCollection);
+  const q = query(
+    librosCollection,
+    orderBy("index"),
+    orderBy("price"),
+    limit(10)
+  );
+  const querySnapshot = await getDocs(q);
 
   const dataDocs = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }));
+
   return dataDocs;
 }
 export function getItemsPromise() {
   return new Promise((resolve, reject) => {
     const librosCollectionRef = collection(db, "libros");
-    getDocs(librosCollectionRef).then((querySnapshot) => {
+    const q = query(librosCollectionRef, orderBy("index"), limit(10));
+
+    getDocs(q).then((querySnapshot) => {
       const dataDocs = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -64,22 +77,26 @@ export  async function getSingleItem(itemid) {
 
 //Funcion que retorna docs de una colección segun una Query o "consulta"
 export  async function getItemsByGender(genderid) {
-  // 1. Necesito una referencia a la colección
+  
   const librosCollectionRef = collection(db, "libros");
-
-  // 2. Crear una query personalizada
-  console.log(genderid);
   const q = query(librosCollectionRef, where("gender", "==", genderid));
-
-  //3. Pedirle a Firebase los documentos de esa Query
   const querySnapshot = await getDocs(q);
-
-  // 4. Mapeamos el snapshot para sacar los datos
   const dataDocs = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }));
   console.log(dataDocs);
 }
+export async function createBuyOrder(order) {
+  const ordersCollection = collection(db, "orders");
 
+  const orderDoc = await addDoc(ordersCollection, order);
+  return orderDoc.id;
+  // resolve(orderDoc.id)
+}
+export async function exportDataWithBatch() {
+  const productsCollectionRef = collection(db, "products");
+  const batch = writeBatch(db);
+  
+}
 export default getItems;
