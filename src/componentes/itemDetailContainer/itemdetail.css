@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Roboto+Mono:ital,wght@1,100&display=swap');
+
   .card{    
     text-align:left;
     margin: 40px auto;
@@ -12,16 +14,16 @@
     transition: all 0.20s ease-in;
     cursor: pointer;
   }
-  
-  
   .card-detail_detail{
     padding: 12px 8px;
   }
-  
   small{
     color: #8c8c8e;
   }
-  
   .card-detail_muted{
     color: #8c8c8e
+  }
+  .bg{
+    background-color: #FFD53D;
+    font-family: 'Kalam', cursive;
   }

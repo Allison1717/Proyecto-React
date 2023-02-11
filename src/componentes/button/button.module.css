@@ -1,10 +1,23 @@
 .btn {
     padding: 5px 15px;
     color: white;
-    max-width: 150px;
-    background-color: rgb(97, 150, 220);
+    max-width: 190px;
     border-radius:  4px; 
-    border: none;
+    border-color: #FFD53D;
     margin: 5px 15px;
     cursor: pointer;
+    justify-content: center;
+    align-content: center;
   }
+
+.btn_letraNegra{
+  padding: 5px 15px;
+  color: black;
+  max-width: 190px;
+  border-radius:  4px; 
+  border-color: #FFD53D;
+  margin: 5px 15px;
+  cursor: pointer;
+  justify-content: center;
+  align-content: center;
+}

@@ -8,12 +8,14 @@ function ItemList(props) {
       {props.libros.map((item) => (
         <Item
           key={item.id}
+          item={item}
+          /*
           id={item.id}
           title={item.title}
           price={item.price}
           gender={item.gender}
           author={item.author}
-          imgurl={item.imgurl}
+          imgurl={item.imgurl}*/
         />
       ))}
     </FlexWrapper>

@@ -1,8 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { cartContext } from "../../storage/cartContext";
+import Button, { ButtonChild } from "../button/Button";
 import "./navBar.css";
+import CartWidget from "./CartWidget";
+import UserMenu from "./UserMenu";
 
-function NavBar(props) {
-  const {clicOnChart}=props
+function NavBar({ onLogin }) {
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    let username = evt.target.elements[0].value;
+    onLogin(username);
+  }
+
+  const { getTotalItems } = useContext(cartContext);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -27,8 +38,10 @@ function NavBar(props) {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="text-center text-light  ">
-            <h1 className="letraNavBar colorGreeting">¡Bienvenidos lectores!</h1>
+          <div className="text-center text-light">
+            <h1 className="letraNavBar colorGreeting">
+              ¡Bienvenidos lectores!
+            </h1>
           </div>
           <div
             className="collapse navbar-collapse justify-content-center "
@@ -36,63 +49,57 @@ function NavBar(props) {
           >
             <ul className="navbar-nav align-items-center text-center">
               <li className="nav-item">
-                <Link to="/"
+                <Link
+                  to="/"
                   className="nav-link active letraNavBar fs-5"
                   aria-current="page"
-                
                 >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link 
-                  className="nav-link letraNavBar fs-5" to="/gender/Mangas"
-                  
-                >
-                  Mangas 
+                <Link className="nav-link letraNavBar fs-5" to="/gender/Mangas">
+                  Mangas
                 </Link>
               </li>
               <li className="nav-item">
-                <Link 
-                  className="nav-link letraNavBar fs-5" to="/gender/Cómics"
-                  
-                >
+                <Link className="nav-link letraNavBar fs-5" to="/gender/Cómics">
                   Cómics
                 </Link>
               </li>
               <li className="nav-item">
-                <Link 
-                  className="nav-link letraNavBar fs-5" to="/gender/Libros-Juveniles"
-                 
+                <Link
+                  className="nav-link letraNavBar fs-5"
+                  to="/gender/Libros-Juveniles"
                 >
                   Libros-Juveniles
                 </Link>
-              </li>              
+              </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link letraNavBar fs-5"  to="/gender/Terror"
-                 
-                >
+                <Link className="nav-link letraNavBar fs-5" to="/gender/Terror">
                   Terror
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/carroCompra"
-                  className="nav-link letraNavBar fs-5"
-                  
-                >
-                  <div className="position-relative">
-                  <img
-                    src="/assets/carroCompra.png"
-                    alt=""
-                    width="70"
-                    height="70"
-                    className="d-inline-block align-text-top"
-                  />
-                  <span className="position-absolute text-center bg-danger rounded-circle"><h5>{clicOnChart}</h5></span>
-                  </div>
-                </Link>
+              
+                <form onSubmit={handleSubmit}>
                 
+                    <input
+                      className="p-2 mb-3"
+                      name="username"
+                      placeholder="username"
+                    />
+               
+                  <button
+                    type="submit"
+                    className="letraNavBar butonLogin py-2 px-5 mb-3"
+                  >
+                    Login
+                  </button>
+                </form>
+         
+
+              <li className="nav-item">
+                <CartWidget/>
               </li>
             </ul>
           </div>

@@ -1,15 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getSingleItem } from "../../services/mockAsyncService";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getSingleItem } from "../../services/firebase";
+import { cartContext } from "../../storage/cartContext";
+import Button, { ButtonChild } from "../button/Button";
+import ItemCount from "../itemCount/ItemCount";
+import Loader from "../Loader/Loader";
 import "./itemdetail.css";
 
 function ItemDetailContainer() {
   const [libros, setLibros] = useState([]);
 
   // 1. obtenemos el valor de la URL con useParams
-  let { itemid } = useParams();
+  /*let { itemid } = useParams();
   console.log(itemid);
-  // { itemid: "1" }
+  const {addItem,removeItem}=useContext(cartContext);*/
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInCart, setIsInCart] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  let { itemid } = useParams();
+  const { addItem } = useContext(cartContext);
+
+  // onAddtoCart
+  function handleAddToCart(count) {
+    /*
+    alert(`Agregaste ${count} de ${libros.title} al carrito`);
+    libros.count = count;
+    addItem(libros);*/
+    setIsInCart(true);
+    libros.count = count;
+    addItem(libros);
+  }
 
   useEffect(() => {
     // 2. Pasamos por parametro al mockService el id
@@ -17,8 +38,21 @@ function ItemDetailContainer() {
       .then((respuesta) => {
         setLibros(respuesta);
       })
-      .catch((error) => alert(`Error: ${error}`));
+      .catch((error) => {
+        setErrorMessage(`Error: ${error}`);
+      })
+      .finally(() => setIsLoading(false));
   }, [itemid]);
+  // 2 -> if con Earyl Return  / if con return anticipado
+  if (isLoading) return <Loader size={500} />;
+
+  if (errorMessage !== null)
+    return (
+      <div>
+        <h2>Error</h2>
+        <p style={{ color: "red" }}>{errorMessage}</p>
+      </div>
+    );
 
   return (
     <div class="card mb-5">
@@ -26,19 +60,42 @@ function ItemDetailContainer() {
         <div class="col-md-4">
           <img
             src={libros.imgurl}
-            class="img-fluid rounded-start p-5"
+            class="img-fluid rounded-start px-5 pt-5"
             alt="imagen"
           ></img>
+          <div className="itemcount_container">
+            <button class="bg px-3">
+              {" "}
+              <img
+                src="/assets/carroCompra.png"
+                alt=""
+                width="60"
+                height="60"
+              />
+              Ir al carrito
+            </button>
+          </div>
         </div>
-        <div class="col-md-8">
-          <div class="card-body my-4 me-4">
-            <h2 class="fst-italic card-title">Título: {libros.title} S/. {libros.price}</h2>  
-            <h5 className="fst-italic text-success">Autor y año: {libros.author}</h5>          
+        <div className="col-md-8">
+          <div className="card-body mt-4 me-4">
+            <h2 className="fst-italic card-title">
+              Título: {libros.title} S/. {libros.price}
+            </h2>
+            <h5 className="fst-italic text-success">
+              Autor y año: {libros.author}
+            </h5>
             <h5 className="fst-italic text-info">Género: {libros.gender}</h5>
             <h5 className="text-warning">Reseña: </h5>
             <p>{libros.reseña}</p>
-            
           </div>
+          {isInCart ? (
+            <Link to="/carroCompra">
+              <Button>Ir al carrito</Button>
+            </Link>
+          ): (
+            <ItemCount onAddToCart={handleAddToCart} />
+          )}
+          
         </div>
       </div>
     </div>

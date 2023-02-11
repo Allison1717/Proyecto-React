@@ -5,27 +5,42 @@ import ToggleButton from "../toggleButton/ToggleButton";
 import { Link } from "react-router-dom";
 
 
-function Item({ id, title, price, author, imgurl ,gender}) {
-   const urlDetail = `/item/${id}`;
+function Item({ item}) {
+   const urlDetail = `/item/${item.id}`;
+   const classNamePrice = item.discount
+   ? "item-card_priceDiscount"
+   : "item-card_price";
+
+ const stylesCard = {
+   color: item.stock <= 0 ? "#c3c3c3" : "black",
+ };
    return (
-    <div className="item-card" >
+    <div style={stylesCard} className="item-card" >
        <ToggleButton icon="⭐" />
       <div className="item-card_header">
-        <h2>{title}</h2>
+        <h2>{item.title}</h2>
       </div>
       <Link to={urlDetail}>
         <div className="item-card_img pb-4">
-          <img src={imgurl} alt="imagen"></img>
+          <img src={item.imgurl} alt="imagen"></img>
         </div>  
       </Link>
       
       <div className="item-card_detail">
-        <h4 className="fst-italic text-info"> {gender}</h4>
-        <h4>S/. {price}</h4>
-        <p className="fw-bold text-success">{author}</p>
-        <Link to={urlDetail}>
-        <ButtonChild color="black">Ver Detalle</ButtonChild>
-        </Link>
+        <h4 className="fst-italic text-info"> {item.gender}</h4>
+        <h4 className={classNamePrice}>S/. {item.price}</h4>
+        {item.discount && <small>{item.discount} %</small>}
+        <small>{item.title}</small>
+        <p className="fw-bold text-success">{item.author}</p>
+        
+        {item.stock> 0 ? (
+          <Link to={urlDetail}>
+            <ButtonChild color="black">Ver Detalle</ButtonChild>
+          </Link>
+          ) : (
+            <p color="red">No hay stock</p>
+          )
+        }
       </div>
     </div>
   );

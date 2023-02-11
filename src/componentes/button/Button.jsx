@@ -10,9 +10,17 @@ export default function Button(props) {
 
 // named exports
 export function ButtonChild(props) {
+  function handleClick() {
+    console.log("...");
+    props.onTouch();
+  }
 
   return (
-    <button style={{ backgroundColor: props.color }} className={styles.btn}>
+    <button
+      onClick={handleClick}
+      style={{ backgroundColor: props.color }}
+      className={styles.btn}
+    >
       {props.children}
     </button>
   );
