@@ -27,3 +27,18 @@
     background-color: #FFD53D;
     font-family: 'Kalam', cursive;
   }
+  .cargando{ 
+    position: relative; 
+    color: #FFF;
+    margin-top: 2em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase
+  }
+  .contenedor{
+    place-content: center;
+    height: 100vh;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

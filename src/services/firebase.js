@@ -26,12 +26,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
-// Funcion que retorna todos los items de la colección "Libros"
 export async function getItems() {
 
-  const librosCollection = collection(db, "libros");
+  const librosCollection = collection(db, "products");
   const q = query(
     librosCollection,
     orderBy("index"),
@@ -47,11 +46,10 @@ export async function getItems() {
 
   return dataDocs;
 }
-export function getItemsPromise() {
+export function getItemsPromise(id) {
   return new Promise((resolve, reject) => {
-    const librosCollectionRef = collection(db, "libros");
-    const q = query(librosCollectionRef, orderBy("index"), limit(10));
-
+    const librosCollectionRef = collection(db, "products");
+    const q = id ? query(librosCollectionRef, where("gender", "==", id)):query(librosCollectionRef, orderBy("index"), limit(10));
     getDocs(q).then((querySnapshot) => {
       const dataDocs = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -61,32 +59,15 @@ export function getItemsPromise() {
     });
   });
 }
-// Funcion que retorna un documento segun su ID
+
 export  async function getSingleItem(itemid) {
-  // 1. Necesito una referencia a la colección
-  const librosCollectionRef = collection(db, "productos");
 
-  // 2. Referencia al documento
+  const librosCollectionRef = collection(db, "products");
   const librosRef = doc(librosCollectionRef, itemid);
-
-  // 3. Recibimos el snap del doc con getDoc(referencia)
   const snapshot = await getDoc(librosRef);
-
   return { ...snapshot.data(), id: snapshot.id };
 }
 
-//Funcion que retorna docs de una colección segun una Query o "consulta"
-export  async function getItemsByGender(genderid) {
-  
-  const librosCollectionRef = collection(db, "libros");
-  const q = query(librosCollectionRef, where("gender", "==", genderid));
-  const querySnapshot = await getDocs(q);
-  const dataDocs = querySnapshot.docs.map((doc) => ({
-    ...doc.data(),
-    id: doc.id,
-  }));
-  console.log(dataDocs);
-}
 export async function createBuyOrder(order) {
   const ordersCollection = collection(db, "orders");
 

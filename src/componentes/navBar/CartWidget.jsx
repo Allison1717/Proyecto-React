@@ -1,15 +1,15 @@
 import React from "react";
-import "./cartWidget.css"
+import "./cartWidget.css";
+import { Link } from "react-router-dom";
 
-function CartWidget() {
-  let countInCart = 0;
+const CartWidget =({totalQuantity}) =>{
 
   return (
-      
-  <button class="position-relative bg"><img src="/assets/carroCompra.png" alt="" width="80" height="80"/>
-    <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">{countInCart !== 0 && countInCart}</span>{countInCart}</span>
-  </button>
-
+    <Link to="/carroCompra">     
+      <button class="position-relative bg"><img src="/assets/carroCompra.png" alt="" width="80" height="80"/>
+        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2">{totalQuantity}</span>
+      </button>
+    </Link>
   );
 }
 

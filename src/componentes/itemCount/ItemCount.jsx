@@ -30,8 +30,9 @@ function ItemCount({onAddToCart, stock}) {
         <button className="btn" onClick={handleAdd}>
           <img src="../../assets/addition.png" width={50} height={50}></img>
         </button>
+        
         <div className="itemcount_btns">
-            <button className="letraNavBar bg rounded-pill p-2 me-3" onClick={() => onAddToCart(count)}>
+            <button className="letraNavBar bg rounded-pill p-2 me-3" disabled={stock <=0} onClick={() => onAddToCart(count)}>
             Agregar al carrito
             </button>
         </div>

@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Roboto+Mono:ital,wght@1,100&display=swap');
+
+h1,h4{
+   font-style: italic;
+   font: white;
+   font-family: 'Kalam', cursive;
+}
+
 .cartList{
-    border-spacing: 0;
+    border-spacing: 10;
     border-radius: 5px;
     border: solid 1px rgb(233, 244, 75);  
     width: 95%;
@@ -11,15 +19,27 @@
   .cartList_head{
     background-color: rgb(233, 244, 75);;
     margin: 8px auto;
+    line-height: 30px;
   }
   
   .cartList_row{
-    line-height: 56px;
+    line-height: 60px;
+
   }
   
   .cartList_detail{
-    color: #787878;
+    background: linear-gradient(-55deg, #4aada5, #C6DF8A,#F0DE65);
+    color: #000000;
+    font: 2em sans-serif;
     text-align: center;
     line-height: 1.5em;
     width: 100%;
   }
+.buttonFC{
+  justify-content: center;
+  align-content: center;
+  margin-left: 550px;
+}
+.bg{
+  background-color: #FFD53D;
+}

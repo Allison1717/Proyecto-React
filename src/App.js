@@ -20,7 +20,6 @@ function App() {
   return (
     <>
       <CartContextProvider>
-        <button onClick={exportDataWithBatch}>Export data</button>
         <BrowserRouter>
           <NavBar onLogin={handleLogin} />
           <Routes>

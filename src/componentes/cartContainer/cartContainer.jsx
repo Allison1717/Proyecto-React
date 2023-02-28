@@ -29,7 +29,7 @@ function CartContainer() {
       total: 1000,
     };
 
-    let id = await createBuyOrder(order); 
+    let id = await createBuyOrder(order);
     navigateTo(`/thank-you/${id}`);
   }
   if (orderId !== null)
@@ -39,12 +39,17 @@ function CartContainer() {
         <p>El id de tu compra es: {orderId}</p>
       </div>
     );
+    
   return (
+    
     <>
-      <h1>Tu Carrito</h1>
+      <div className="container bg-color">
+        <h1 className="text-center my-5 py-3">Mi Carrito</h1>
+      </div>
 
-      <table className="cartList">
-        <thead className="cartList_head">
+      <div className="container text-center">
+      <table className="cartList table table-hover border border-dark fs-5">
+        <thead className="cartList_head bg">
           <tr className="cartList_row">
             <th>Miniatura</th>
             <th>Titulo</th>
@@ -56,35 +61,52 @@ function CartContainer() {
         </thead>
         <tbody>
           {cart.map((item) => (
-            <tr key={item.id} className="cartList_row">
+            <tr key={item.id} className="cartList_row bg-white ">
               <td>
-                <img height={50} src={item.imgurl} alt={item.title} />
+                <img
+                  height={150}
+                  weight={250}
+                  src={item.imgurl}
+                  alt={item.title}
+                />
               </td>
               <td>{item.title}</td>
               <td>S/. {item.price}</td>
               <td>{item.count}</td>
               <td>
-                <button color="#c63224" onClick={item.removeItem}>
-                <img
-                src="/assets/boton-eliminar.png"
-                alt=""
-                width="60"
-                height="60"
-                />
+                <button onClick={item.removeItem}>
+                  <img
+                    src="/assets/boton-eliminar.png"
+                    alt=""
+                    width="60"
+                    height="60"
+                  />
                 </button>
               </td>
-              <th>S/. --,--</th>
+              
+              <th>S/. {item.count * item.price}</th>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
 
-    <div className="cartList_detail">
-      <h4>El total de tu compra es de S/.  --,--</h4>
-    </div>
-    <ButtonChild onTouch={handleCheckout}>Finalizar Compra</ButtonChild>
-  </>
-);
+      <div className="cartList_detail bg-color container mt-5">
+        <h4 className="p-3">El total de tu compra es de S/. {}</h4>
+      </div>
+  
+        <button class="bg px-5 buttonFC my-5" onTouch={handleCheckout}>
+          {" "}
+          <img
+            src="/assets/carroCompra.png"
+            alt="carroCompra"
+            width="60"
+            height="60"
+          />
+          Finalizar Compra
+        </button>
+    </>
+  );
 }
 
 export default CartContainer;

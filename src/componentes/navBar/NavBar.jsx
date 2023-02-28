@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../storage/cartContext";
-import Button, { ButtonChild } from "../button/Button";
 import "./navBar.css";
 import CartWidget from "./CartWidget";
-import UserMenu from "./UserMenu";
+
 
 function NavBar({ onLogin }) {
   function handleSubmit(evt) {
@@ -13,12 +12,12 @@ function NavBar({ onLogin }) {
     onLogin(username);
   }
 
-  const { getTotalItems } = useContext(cartContext);
+  const { totalQuantity } = useContext(cartContext);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
+          <Link to="/#" className="navbar-brand">
             <img
               src="/assets/logoLaCasaDelLibro.png"
               alt=""
@@ -99,7 +98,7 @@ function NavBar({ onLogin }) {
          
 
               <li className="nav-item">
-                <CartWidget/>
+                <CartWidget totalQuantity={totalQuantity}/>
               </li>
             </ul>
           </div>
