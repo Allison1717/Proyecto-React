@@ -7,9 +7,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage"
 import { CartContextProvider } from "./storage/cartContext";
+import Checkout from "./componentes/checkout/Checkout.jsx";
 import CartContainer from "./componentes/cartContainer/cartContainer";
 import OrderDetails from "./componentes/orderDetails/OrderDetails";
-import { exportData, exportDataWithBatch } from "./services/firebase";
+//import { exportData, exportDataWithBatch } from "./services/firebase";
 //componente App
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
             <Route path="/gender/:genderid" element={<HomePage />} />
             <Route path="/item/:itemid" element={<ItemDetailContainer />} />
             <Route path="/carroCompra" element={<CartContainer />} />
-            <Route path="/contacto" element={<h1>Conctacto</h1>} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/thank-you/:orderid" element={<OrderDetails />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

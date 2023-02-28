@@ -2,11 +2,10 @@ import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { cartContext } from "../../storage/cartContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createBuyOrder } from "../../services/firebase";
-import { ButtonChild } from "../button/Button";
+//import { ButtonChild } from "../button/Button";
 import "./cart.css";
-import CartForm from "./CartForm";
 
 function CartContainer() {
   const { cart, totalPrice, removeItem, clearCart } = useContext(cartContext);
@@ -95,16 +94,18 @@ function CartContainer() {
         <h4 className="p-3">El total de tu compra es de S/. {totalPrice()}</h4>
       </div>
       <div className="d-flex justify-content-center align-content-center">
-        <button class="bg px-5  my-5" onTouch={handleCheckout}>
-          {" "}
-          <img
-            src="/assets/carroCompra.png"
-            alt="carroCompra"
-            width="60"
-            height="60"
-          />
-          Finalizar Compra
-        </button>
+        <Link to="/checkout">
+          <button class="bg px-5  my-5">
+            {" "}
+            <img
+              src="/assets/carroCompra.png"
+              alt="carroCompra"
+              width="60"
+              height="60"
+            />
+            Finalizar Compra
+          </button>
+        </Link>
 
         <button class="bg-limpiar px-5 ms-3 my-5" onClick={() => clearCart()}>
           {" "}

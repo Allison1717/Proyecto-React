@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Roboto+Mono:ital,wght@1,100&display=swap');
+.container{
+    width: 60%;
+}
+.form-label{
+    font-family: 'Kalam', cursive;
+}
+.form-control{
+    margin-bottom: 20px;
+    font-family: 'Kalam', cursive;
+}
+.card{
+    width: 50rem;
+}
