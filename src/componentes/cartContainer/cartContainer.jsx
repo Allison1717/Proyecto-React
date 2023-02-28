@@ -106,7 +106,7 @@ function CartContainer() {
           Finalizar Compra
         </button>
 
-        <button class="bg-limpiar px-5 ms-3 my-5" onTouch={clearCart()}>
+        <button class="bg-limpiar px-5 ms-3 my-5" onClick={() => clearCart()}>
           {" "}
           <img
             src="/assets/limpiar.png"
