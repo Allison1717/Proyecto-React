@@ -6,7 +6,7 @@ import { cartContext } from "../../storage/cartContext";
 import ItemCount from "../itemCount/ItemCount";
 import "./itemdetail.css";
 import { db } from "../../services/firebase";
-import { warning } from "@remix-run/router";
+//import { warning } from "@remix-run/router";
 
 function ItemDetailContainer() {
   const [libros, setLibros] = useState([]);

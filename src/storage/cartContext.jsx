@@ -19,7 +19,7 @@ const getTotalQuantity = () =>{
     let accu = 0
     
     cart.forEach(libros =>{
-        accu+=libros.quantity
+        accu+=libros.count
     })
     return accu
 }
@@ -29,7 +29,7 @@ const clearCart = () => setCart([])
 
 const removeItem = (id) => setCart(cart.filter(libros => libros.id !== id))
 
-const totalPrice = () => { return cart.reduce((prev,act) => prev + act.quantity*act.price,0)}
+const totalPrice = () => { return cart.reduce((prev,act) => prev + act.count*act.price,0)}
 
 return(
 

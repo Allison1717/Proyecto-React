@@ -9,7 +9,7 @@ import "./cart.css";
 import CartForm from "./CartForm";
 
 function CartContainer() {
-  const { cart } = useContext(cartContext);
+  const { cart, totalPrice, removeItem } = useContext(cartContext);
   const [orderId, setOrderId] = useState(null);
   const navigateTo = useNavigate();
 
@@ -74,7 +74,7 @@ function CartContainer() {
               <td>S/. {item.price}</td>
               <td>{item.count}</td>
               <td>
-                <button onClick={item.removeItem}>
+                <button onClick={removeItem()}>
                   <img
                     src="/assets/boton-eliminar.png"
                     alt=""
@@ -92,7 +92,7 @@ function CartContainer() {
       </div>
 
       <div className="cartList_detail bg-color container mt-5">
-        <h4 className="p-3">El total de tu compra es de S/. {}</h4>
+        <h4 className="p-3">El total de tu compra es de S/. {totalPrice()}</h4>
       </div>
   
         <button class="bg px-5 buttonFC my-5" onTouch={handleCheckout}>
