@@ -35,11 +35,10 @@ h1,h4{
     line-height: 1.5em;
     width: 100%;
   }
-.buttonFC{
-  justify-content: center;
-  align-content: center;
-  margin-left: 550px;
-}
+
 .bg{
   background-color: #FFD53D;
+}
+.bg-limpiar{
+  background-color: #6ABA9E;
 }

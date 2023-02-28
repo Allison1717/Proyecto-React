@@ -9,7 +9,7 @@ import "./cart.css";
 import CartForm from "./CartForm";
 
 function CartContainer() {
-  const { cart, totalPrice, removeItem } = useContext(cartContext);
+  const { cart, totalPrice, removeItem, clearCart } = useContext(cartContext);
   const [orderId, setOrderId] = useState(null);
   const navigateTo = useNavigate();
 
@@ -74,7 +74,7 @@ function CartContainer() {
               <td>S/. {item.price}</td>
               <td>{item.count}</td>
               <td>
-                <button onClick={removeItem()}>
+                <button onClick={() => removeItem(item.id)}>
                   <img
                     src="/assets/boton-eliminar.png"
                     alt=""
@@ -94,8 +94,8 @@ function CartContainer() {
       <div className="cartList_detail bg-color container mt-5">
         <h4 className="p-3">El total de tu compra es de S/. {totalPrice()}</h4>
       </div>
-  
-        <button class="bg px-5 buttonFC my-5" onTouch={handleCheckout}>
+      <div className="d-flex justify-content-center align-content-center">
+        <button class="bg px-5  my-5" onTouch={handleCheckout}>
           {" "}
           <img
             src="/assets/carroCompra.png"
@@ -105,6 +105,18 @@ function CartContainer() {
           />
           Finalizar Compra
         </button>
+
+        <button class="bg-limpiar px-5 ms-3 my-5" onTouch={clearCart()}>
+          {" "}
+          <img
+            src="/assets/limpiar.png"
+            alt="limpiar"
+            width="60"
+            height="50"
+          />
+         Vaciar carrito
+        </button>
+      </div>
     </>
   );
 }
