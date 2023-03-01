@@ -101,7 +101,7 @@ const Checkout = () => {
   if ( orderId) {
     return (
       <>
-        <div className="container rounded-4 mt-5 pt-3 pb-2 px-2 bg-color text-align-center text-center">
+        <div className="container rounded-4 my-5 pt-3 pb-2 px-2 bg-color text-align-center text-center">
           <h1 className="py-3">¡¡¡ Gracias por tu compra {buyer.name}!!!</h1>
           <img
             src="/assets/cart.png"
