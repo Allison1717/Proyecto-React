@@ -9,13 +9,6 @@ function ItemList(props) {
         <Item
           key={item.id}
           item={item}
-          /*
-          id={item.id}
-          title={item.title}
-          price={item.price}
-          gender={item.gender}
-          author={item.author}
-          imgurl={item.imgurl}*/
         />
       ))}
     </FlexWrapper>

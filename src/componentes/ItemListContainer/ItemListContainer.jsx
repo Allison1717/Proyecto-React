@@ -1,47 +1,63 @@
 import React, { useState, useEffect } from "react";
 import FlexWrapper from "../flexWrapper/FlexWrapper";
-import { getItemsPromise, getItems } from "../../services/firebase";
+//import { getItemsPromise, getItems } from "../../services/firebase";
 import ItemList from "../itemList/ItemList";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Notification from "../notification/Notification";
+import {
+  collection,
+  query,
+  where,
+  getDocs
+} from "firebase/firestore";
+import { db } from '../../services/firebase'
 
 function ItemListContainer() {
   const [libros, setLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   let {genderid} = useParams();
-  
-  const [notification, setNotification] = useState({
+  const [error] = useState(false);
+  const [notification] = useState({
     type: "info",
-    text: "Cargando datos",
+    text: "Cargando libros ",
   });
-  let idgender = undefined;
-  
-  async function getLibros() {
-    try {
-      let response = await getItemsPromise(genderid);
-      setLibros(response);
-      setNotification({
-        type: "default",
-        text: `Se cargaron ${response.length} libros correctamente...`,
-      });
-    } catch (error) {
-      alert(error);
-      setNotification({
-        type: "danger",
-        text: `Error cargando los libros: ${error}`,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  
-}
+    useEffect(() => {
+      setIsLoading(true)
 
-  useEffect(() => {
-    getLibros();
-  }, [idgender]);
-
-  console.log(libros)
+      const collectionRef = genderid ? query(collection(db,'products'),where('gender', '==',genderid)) : collection(db,'products')
+      console.log(genderid)
+      getDocs(collectionRef).then(response =>{
+          const librosAdapted = response.docs.map(doc => {
+              const data = doc.data()
+              console.log(data)
+              return {id: doc.id, ...data}
+          })
+          setLibros(librosAdapted)
+          console.log(librosAdapted)
+      }).catch(error =>{
+          console.log(error)
+      }).finally(() =>{
+        setIsLoading(false)
+      })
+      
+  },[genderid])
+  
+    if(isLoading){
+      return(
+          <>
+              <div className='contenedor'>
+                  <div className='contenedor-loader'>
+                      <div className='rueda'></div>
+                  </div>
+                  <div className='cargando'>Cargando...</div>
+              </div>
+          </>
+      )
+  }
+  if(error){
+      return <h1 className="bg-color text-dark py-5">Existe un error en la plataforma...</h1>
+  }
   return (
     <>
      <FlexWrapper column>
@@ -49,7 +65,7 @@ function ItemListContainer() {
 
       {isLoading ? (
         <FlexWrapper>
-          <Loader color="blue" size={500} />
+          <Loader color="white" size={200} />
         </FlexWrapper>
       ) : (
          <ItemList libros={libros} />
@@ -59,7 +75,4 @@ function ItemListContainer() {
     </>
   );
 }
-
-
-
 export default ItemListContainer;

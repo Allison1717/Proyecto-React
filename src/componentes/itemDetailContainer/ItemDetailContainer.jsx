@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
-//import { getSingleItem } from "../../services/firebase";
 import { cartContext } from "../../storage/cartContext";
 import ItemCount from "../itemCount/ItemCount";
 import "./itemdetail.css";
 import { db } from "../../services/firebase";
-//import { warning } from "@remix-run/router";
 
 function ItemDetailContainer() {
   const [libros, setLibros] = useState([]);
@@ -84,6 +82,9 @@ function ItemDetailContainer() {
             <h5 className="fst-italic text-info">Género: {libros.gender}</h5>
             <h5 className="text-warning">Reseña: </h5>
             <p>{libros.reseña}</p>
+            <h5 className="fst-italic text-danger">
+              Stock: {libros.stock}
+            </h5>
           </div>
           {isInCart ? (
             <Link to="/carroCompra">

@@ -32,7 +32,7 @@ function Item({ item}) {
         {item.discount && <small>{item.discount} %</small>}
         <small>{item.title}</small>
         <p className="fw-bold text-success">{item.author}</p>
-        
+        <p className="fw-bold text-warning">Stock : {item.stock}</p>
         {item.stock> 0 ? (
           <Link to={urlDetail}>
             <ButtonChild color="black">Ver Detalle</ButtonChild>

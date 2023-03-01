@@ -50,7 +50,7 @@ const Checkout = () => {
         console.log("dataDoc: ", dataDoc);
         const stockDb = dataDoc.stock;
         const librosAddedToCart = cart.find((libros) => libros.id === doc.id);
-        const librosQuantity = librosAddedToCart.quantity;
+        const librosQuantity = librosAddedToCart.count;
 
         if (stockDb >= librosQuantity) {
           batch.update(doc.ref, { stock: stockDb - librosQuantity });
@@ -71,7 +71,7 @@ const Checkout = () => {
         clearCart();
         setTimeout(() => {
           navigate("/");
-        }, 5000);
+        }, 10000);
         console.log(id);
         console.log("compra: ", objOrder);
       } else {
@@ -95,15 +95,23 @@ const Checkout = () => {
         </div>
       </>
     );
+    
   }
 
-  if (orderId) {
+  if ( orderId) {
     return (
       <>
-        <div className="contenedor bg-color text-align-center text-center">
-          <h1 className="cargando text-dark">
-            El id de su compra es: {orderId}
-          </h1>
+        <div className="container rounded-4 mt-5 pt-3 pb-2 px-2 bg-color text-align-center text-center">
+          <h1 className="py-3">¡¡¡ Gracias por tu compra {buyer.name}!!!</h1>
+          <img
+            src="/assets/cart.png"
+            alt="compra"
+            width="150"
+            height="150"
+          />
+          <div className="d-flex justify-content-center">
+          <h2 className="py-3">El id de su compra es: <h3 className="text-danger">{orderId}</h3></h2>
+          </div>
         </div>
       </>
     );

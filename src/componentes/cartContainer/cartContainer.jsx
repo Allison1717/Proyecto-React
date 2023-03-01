@@ -11,7 +11,7 @@ function CartContainer() {
   const { cart, totalPrice, removeItem, clearCart } = useContext(cartContext);
   const [orderId, setOrderId] = useState(null);
   const navigateTo = useNavigate();
-/*
+
   async function handleCheckout(userData) {
     const items = cart.map((libros) => ({
       id: libros.id,
@@ -37,7 +37,7 @@ function CartContainer() {
         <p>El id de tu compra es: {orderId}</p>
       </div>
     );
-    */
+   
     if (cart.length === 0) {
       return (
         <div className="container bg-color text-align-center text-center rounded-4 mt-5 pt-3 pb-2 px-4">
