@@ -35,13 +35,13 @@ const Checkout = () => {
 
       const batch = writeBatch(db);
 
-      const ids = cart.map((toys) => toys.id);
-      const juguetesRef = query(
-        collection(db, "juguetes"),
+      const ids = cart.map((libros) => libros.id);
+      const librosRef = query(
+        collection(db, "products"),
         where(documentId(), "in", ids)
       );
-      const juguetesAddredToCartFromFirestore = await getDocs(juguetesRef);
-      const { docs } = juguetesAddredToCartFromFirestore;
+      const librosAddredToCartFromFirestore = await getDocs(librosRef);
+      const { docs } = librosAddredToCartFromFirestore;
 
       const outOfStock = [];
 
@@ -49,11 +49,11 @@ const Checkout = () => {
         const dataDoc = doc.data();
         console.log("dataDoc: ", dataDoc);
         const stockDb = dataDoc.stock;
-        const jugueteAddedToCart = cart.find((toys) => toys.id === doc.id);
-        const jugueteQuantity = jugueteAddedToCart.quantity;
+        const librosAddedToCart = cart.find((libros) => libros.id === doc.id);
+        const librosQuantity = librosAddedToCart.quantity;
 
-        if (stockDb >= jugueteQuantity) {
-          batch.update(doc.ref, { stock: stockDb - jugueteQuantity });
+        if (stockDb >= librosQuantity) {
+          batch.update(doc.ref, { stock: stockDb - librosQuantity });
         } else {
           outOfStock.push({ id: doc.id, ...dataDoc });
         }
@@ -75,7 +75,7 @@ const Checkout = () => {
         console.log(id);
         console.log("compra: ", objOrder);
       } else {
-        console.error("hay productos fuera de stock");
+        console.error("Hay LIBROS fuera de stock");
       }
     } catch (error) {
       console.error(error);
@@ -100,7 +100,7 @@ const Checkout = () => {
   if (orderId) {
     return (
       <>
-        <div className="contenedor bienvenida2 text-center">
+        <div className="contenedor bg-color text-align-center text-center">
           <h1 className="cargando text-dark">
             El id de su compra es: {orderId}
           </h1>
@@ -111,10 +111,16 @@ const Checkout = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="contenedor bienvenida2 text-center">
-        <h1 className="cargando detalle text-dark">
+      <div className="container bg-color text-align-center text-center rounded-4 mt-5 pt-3 pb-2 px-4">
+        <h1 className="cargando text-dark">
           No hay productos en el carrito
         </h1>
+        <img
+            src="/assets/carroVacio.png"
+            alt="limpiar"
+            width="150"
+            height="150"
+          />
       </div>
     );
   }
